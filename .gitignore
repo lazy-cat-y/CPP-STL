@@ -1,0 +1,61 @@
+# Compiled source
+*.out
+*.o
+*.lo
+*.la
+*.al
+*.i
+*.ii
+*.s
+*.su
+*.swp
+*.d
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Executables
+*.exe
+*.out
+*.app
+*.out
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+*.def
+*.exp
+*.pdb
+
+# Shared objects (shared libraries)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Debug files
+*.ncb
+*.sdf
+*.opensdf
+*.vcxproj.user
+*.vscode
+
+# IDE files
+*.idea/
+*.vscode/
+*.code-workspace
+
+# Logs
+*.log
+
+# Other
+*.DS_Store
+*.directory
+.cache/
+build/
+third-party/
