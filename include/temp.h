@@ -1,5 +1,7 @@
 
 
+// for lsp server when coding.
+
 #include "configs.h"
 
 #include "memory.h"
