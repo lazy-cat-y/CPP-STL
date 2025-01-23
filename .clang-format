@@ -149,6 +149,7 @@ ReferenceAlignment: Right
 RequiresClausePosition: OwnLine
 RequiresExpressionIndentation: OuterScope
 
+SeparateDefinitionBlocks: Always
 SortIncludes: CaseSensitive
 SortUsingDeclarations: LexicographicNumeric
 SpaceAfterCStyleCast: false

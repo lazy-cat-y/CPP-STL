@@ -18,3 +18,26 @@
 #include "___type_traits/remove_const.h"
 #include "___type_traits/remove_cv.h"
 #include "___type_traits/remove_volatile.h"
+
+// Composite type categories
+
+// Type properties
+#include "___type_traits/has_unique_object_representations.h"
+#include "___type_traits/is_abstract.h"
+#include "___type_traits/is_aggregate.h"
+#include "___type_traits/is_bounded_array.h"
+#include "___type_traits/is_const.h"
+#include "___type_traits/is_empty.h"
+#include "___type_traits/is_final.h"
+#include "___type_traits/is_implicit_lifetime.h"
+#include "___type_traits/is_literal_type.h"
+#include "___type_traits/is_pod.h"
+#include "___type_traits/is_polymorphic.h"
+#include "___type_traits/is_scoped_enum.h"
+#include "___type_traits/is_signed.h"
+#include "___type_traits/is_standard_layout.h"
+#include "___type_traits/is_trivial.h"
+#include "___type_traits/is_trivially_copyable.h"
+#include "___type_traits/is_unbounded_array.h"
+#include "___type_traits/is_unsigned.h"
+#include "___type_traits/is_volatile.h"

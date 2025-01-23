@@ -5,6 +5,7 @@
 
 #include "___type_traits/integral_constant.h"
 #include "___type_traits/remove_cv.h"
+#include "configs.h"
 
 namespace lc {
 
@@ -13,8 +14,10 @@ namespace lc {
 template <class _Tp>
 struct is_pointer : bool_constant<__is_pointer(_Tp)> {};
 
+#if __STL_CPP_VERSION >= 17
 template <class _Tp>
 inline constexpr bool is_pointer_v = __is_pointer(_Tp);
+#endif
 
 #else  // __has_builtin(__is_pointer)
 
@@ -27,8 +30,10 @@ struct __is_pointer_t<_Tp *> : true_type {};
 template <class _Tp>
 struct is_pointer : public __is_pointer_t<__remove_cv_t<_Tp>> {};
 
+#if __STL_CPP_VERSION >= 17
 template <class _Tp>
 inline constexpr bool is_pointer_v = is_pointer<_Tp>::value;
+#endif
 
 #endif
 
