@@ -21,7 +21,6 @@ message(STATUS "Google Test source dir: ${googletest_SOURCE_DIR}")
 message(STATUS "Google Test binary dir: ${googletest_BINARY_DIR}")
 
 set(SOURCE_FILES
-    test_type_traits.cc
 )
 
 add_executable(stl-tests ${SOURCE_FILES})
@@ -32,5 +31,3 @@ target_include_directories(stl-tests PRIVATE
     ${googletest_SOURCE_DIR}/googletest/include
     ${googletest_SOURCE_DIR}/googlemock/include
 )
-
-add_test(NAME TypeTraitsTest COMMAND stl-tests TypeTraitsTest)

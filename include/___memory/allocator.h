@@ -7,9 +7,9 @@
 #include <limits>
 #include <memory>
 #include <new>
+#include <type_traits>
 
-#include "configs.h"
-#include "type_traits.h"
+#include "__lc_configs.h"
 
 namespace lc {
 
@@ -31,8 +31,8 @@ public:
     typedef const _T      &const_reference;
     typedef std::size_t    size_type;
     typedef std::ptrdiff_t difference_type;
-    typedef lc::true_type  propagate_on_container_move_assignment;
-    typedef lc::true_type  is_always_equal;
+    typedef std::true_type  propagate_on_container_move_assignment;
+    typedef std::true_type  is_always_equal;
 
 public:
     // constructor
