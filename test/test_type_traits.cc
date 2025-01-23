@@ -183,24 +183,6 @@ TEST(TypeTraits, is_function) {
     static_assert(lc::is_function<int(int)>::value, "int(int) is function");
 }
 
-// is reference
-TEST(TypeTraits, is_reference) {
-    static_assert(!lc::is_reference<int>::value, "int is reference");
-    static_assert(!lc::is_reference<const int>::value,
-                  "const int is reference");
-    static_assert(!lc::is_reference<volatile int>::value,
-                  "volatile int is reference");
-    static_assert(!lc::is_reference<const volatile int>::value,
-                  "const volatile int is reference");
-
-    static_assert(!lc::is_reference<int[]>::value, "int[] is not reference");
-    static_assert(!lc::is_reference<int[5]>::value, "int[5] is not reference");
-
-    static_assert(!lc::is_reference<int *>::value, "int* is not reference");
-    static_assert(lc::is_reference<int &>::value, "int& is reference");
-    static_assert(lc::is_reference<int &&>::value, "int&& is reference");
-}
-
 // is pointer
 TEST(TypeTraits, is_pointer) {
     static_assert(!lc::is_pointer<int>::value, "int is pointer");
@@ -297,6 +279,258 @@ TEST(TypeTraits, is_member_function_pointer) {
     static_assert(
         lc::is_member_function_pointer<void (S::*)() const volatile>::value,
         "void (S::*)() const volatile is member function pointer");
+}
+
+// is integral
+TEST(TypeTraits, is_integral) {
+    static_assert(lc::is_integral<bool>::value, "bool is integral");
+    static_assert(lc::is_integral<char>::value, "char is integral");
+    static_assert(lc::is_integral<signed char>::value, "signed char is integral");
+    static_assert(lc::is_integral<unsigned char>::value,
+                  "unsigned char is integral");
+    static_assert(lc::is_integral<wchar_t>::value, "wchar_t is integral");
+    static_assert(lc::is_integral<char16_t>::value, "char16_t is integral");
+    static_assert(lc::is_integral<char32_t>::value, "char32_t is integral");
+    static_assert(lc::is_integral<short>::value, "short is integral");
+    static_assert(lc::is_integral<unsigned short>::value,
+                  "unsigned short is integral");
+    static_assert(lc::is_integral<int>::value, "int is integral");
+    static_assert(lc::is_integral<unsigned int>::value,
+                  "unsigned int is integral");
+    static_assert(lc::is_integral<long>::value, "long is integral");
+    static_assert(lc::is_integral<unsigned long>::value,
+                  "unsigned long is integral");
+    static_assert(lc::is_integral<long long>::value, "long long is integral");
+    static_assert(lc::is_integral<unsigned long long>::value,
+                  "unsigned long long is integral");
+
+    static_assert(!lc::is_integral<float>::value, "float is not integral");
+    static_assert(!lc::is_integral<const float>::value,
+                  "const float is not integral");
+    static_assert(!lc::is_integral<volatile float>::value,
+                  "volatile float is not integral");
+    static_assert(!lc::is_integral<const volatile float>::value,
+                  "const volatile float is not integral");
+
+    static_assert(!lc::is_integral<int[]>::value, "int[] is not integral");
+    static_assert(!lc::is_integral<int[5]>::value, "int[5] is not integral");
+
+    static_assert(!lc::is_integral<int *>::value, "int* is not integral");
+    static_assert(!lc::is_integral<int &>::value, "int& is not integral");
+    static_assert(!lc::is_integral<int &&>::value, "int&& is not integral");
+}
+
+// is floating point
+TEST(TypeTraits, is_floating_point) {
+    static_assert(lc::is_floating_point<float>::value, "float is floating point");
+    static_assert(lc::is_floating_point<double>::value, "double is floating point");
+    static_assert(lc::is_floating_point<long double>::value,
+                  "long double is floating point");
+
+    static_assert(!lc::is_floating_point<int>::value, "int is not floating point");
+    static_assert(!lc::is_floating_point<const int>::value,
+                  "const int is not floating point");
+    static_assert(!lc::is_floating_point<volatile int>::value,
+                  "volatile int is not floating point");
+    static_assert(!lc::is_floating_point<const volatile int>::value,
+                  "const volatile int is not floating point");
+
+    static_assert(!lc::is_floating_point<int[]>::value,
+                  "int[] is not floating point");
+    static_assert(!lc::is_floating_point<int[5]>::value,
+                  "int[5] is not floating point");
+
+    static_assert(!lc::is_floating_point<int *>::value,
+                  "int* is not floating point");
+    static_assert(!lc::is_floating_point<int &>::value,
+                  "int& is not floating point");
+    static_assert(!lc::is_floating_point<int &&>::value,
+                  "int&& is not floating point");
+}
+
+// ---------------------------------------------
+// Composite type categories
+
+// is fundamental
+TEST(TypeTraits, is_fundamental) {
+    static_assert(lc::is_fundamental<int>::value, "int is fundamental");
+    static_assert(lc::is_fundamental<const int>::value,
+                  "const int is fundamental");
+    static_assert(lc::is_fundamental<volatile int>::value,
+                  "volatile int is fundamental");
+    static_assert(lc::is_fundamental<const volatile int>::value,
+                  "const volatile int is fundamental");
+
+    static_assert(lc::is_fundamental<float>::value, "float is fundamental");
+    static_assert(lc::is_fundamental<const float>::value,
+                  "const float is fundamental");
+    static_assert(lc::is_fundamental<volatile float>::value,
+                  "volatile float is fundamental");
+    static_assert(lc::is_fundamental<const volatile float>::value,
+                  "const volatile float is fundamental");
+
+    static_assert(!lc::is_fundamental<int[]>::value,
+                  "int[] is not fundamental");
+    static_assert(!lc::is_fundamental<int[5]>::value,
+                  "int[5] is not fundamental");
+
+    static_assert(!lc::is_fundamental<int *>::value, "int* is not fundamental");
+    static_assert(!lc::is_fundamental<int &>::value, "int& is not fundamental");
+    static_assert(!lc::is_fundamental<int &&>::value,
+                  "int&& is not fundamental");
+}
+
+// is arithmetic
+TEST(TypeTraits, is_arithmetic) {
+    static_assert(lc::is_arithmetic<int>::value, "int is arithmetic");
+    static_assert(lc::is_arithmetic<const int>::value,
+                  "const int is arithmetic");
+    static_assert(lc::is_arithmetic<volatile int>::value,
+                  "volatile int is arithmetic");
+    static_assert(lc::is_arithmetic<const volatile int>::value,
+                  "const volatile int is arithmetic");
+
+    static_assert(lc::is_arithmetic<float>::value, "float is arithmetic");
+    static_assert(lc::is_arithmetic<const float>::value,
+                  "const float is arithmetic");
+    static_assert(lc::is_arithmetic<volatile float>::value,
+                  "volatile float is arithmetic");
+    static_assert(lc::is_arithmetic<const volatile float>::value,
+                  "const volatile float is arithmetic");
+
+    static_assert(!lc::is_arithmetic<int[]>::value, "int[] is not arithmetic");
+    static_assert(!lc::is_arithmetic<int[5]>::value,
+                  "int[5] is not arithmetic");
+
+    static_assert(!lc::is_arithmetic<int *>::value, "int* is not arithmetic");
+    static_assert(!lc::is_arithmetic<int &>::value, "int& is not arithmetic");
+    static_assert(!lc::is_arithmetic<int &&>::value, "int&& is not arithmetic");
+}
+
+// is compound
+TEST(TypeTraits, is_compound) {
+    static_assert(!lc::is_compound<int>::value, "int is compound");
+    static_assert(!lc::is_compound<const int>::value, "const int is compound");
+    static_assert(!lc::is_compound<volatile int>::value,
+                  "volatile int is compound");
+    static_assert(!lc::is_compound<const volatile int>::value,
+                  "const volatile int is compound");
+
+    static_assert(!lc::is_compound<float>::value, "float is compound");
+    static_assert(!lc::is_compound<const float>::value,
+                  "const float is compound");
+    static_assert(!lc::is_compound<volatile float>::value,
+                  "volatile float is compound");
+    static_assert(!lc::is_compound<const volatile float>::value,
+                  "const volatile float is compound");
+
+    static_assert(lc::is_compound<int[]>::value, "int[] is compound");
+    static_assert(lc::is_compound<int[5]>::value, "int[5] is compound");
+
+    static_assert(lc::is_compound<int *>::value, "int* is compound");
+    static_assert(lc::is_compound<int &>::value, "int& is compound");
+    static_assert(lc::is_compound<int &&>::value, "int&& is compound");
+}
+
+// is scalar
+TEST(TypeTraits, is_scalar) {
+    static_assert(lc::is_scalar<int>::value, "int is scalar");
+    static_assert(lc::is_scalar<const int>::value, "const int is scalar");
+    static_assert(lc::is_scalar<volatile int>::value, "volatile int is scalar");
+    static_assert(lc::is_scalar<const volatile int>::value,
+                  "const volatile int is scalar");
+
+    static_assert(lc::is_scalar<float>::value, "float is scalar");
+    static_assert(lc::is_scalar<const float>::value, "const float is scalar");
+    static_assert(lc::is_scalar<volatile float>::value,
+                  "volatile float is scalar");
+    static_assert(lc::is_scalar<const volatile float>::value,
+                  "const volatile float is scalar");
+
+    static_assert(!lc::is_scalar<int[]>::value, "int[] is not scalar");
+    static_assert(!lc::is_scalar<int[5]>::value, "int[5] is not scalar");
+
+    static_assert(lc::is_scalar<int *>::value, "int* is scalar");
+    static_assert(!lc::is_scalar<int &>::value, "int& is not scalar");
+    static_assert(!lc::is_scalar<int &&>::value, "int&& is not scalar");
+}
+
+// is object
+TEST(TypeTraits, is_object) {
+    static_assert(lc::is_object<int>::value, "int is object");
+    static_assert(lc::is_object<const int>::value, "const int is object");
+    static_assert(lc::is_object<volatile int>::value, "volatile int is object");
+    static_assert(lc::is_object<const volatile int>::value,
+                  "const volatile int is object");
+
+    static_assert(lc::is_object<float>::value, "float is object");
+    static_assert(lc::is_object<const float>::value, "const float is object");
+    static_assert(lc::is_object<volatile float>::value,
+                  "volatile float is object");
+    static_assert(lc::is_object<const volatile float>::value,
+                  "const volatile float is object");
+
+    static_assert(lc::is_object<int[]>::value, "int[] is object");
+    static_assert(lc::is_object<int[5]>::value, "int[5] is object");
+
+    static_assert(lc::is_object<int *>::value, "int* is object");
+    static_assert(!lc::is_object<int &>::value, "int& is not object");
+    static_assert(!lc::is_object<int &&>::value, "int&& is not object");
+}
+
+// is member pointer
+TEST(TypeTraits, is_member_pointer) {
+    struct S {
+        int    i;
+        double d;
+    };
+
+    static_assert(!lc::is_member_pointer<int>::value, "int is member pointer");
+    static_assert(!lc::is_member_pointer<const int>::value,
+                  "const int is member pointer");
+    static_assert(!lc::is_member_pointer<volatile int>::value,
+                  "volatile int is member pointer");
+    static_assert(!lc::is_member_pointer<const volatile int>::value,
+                  "const volatile int is member pointer");
+
+    static_assert(!lc::is_member_pointer<int[]>::value,
+                  "int[] is not member pointer");
+    static_assert(!lc::is_member_pointer<int[5]>::value,
+                  "int[5] is not member pointer");
+
+    static_assert(!lc::is_member_pointer<int *>::value,
+                  "int* is not member pointer");
+    static_assert(!lc::is_member_pointer<int &>::value,
+                  "int& is not member pointer");
+    static_assert(!lc::is_member_pointer<int &&>::value,
+                  "int&& is not member pointer");
+
+    static_assert(lc::is_member_pointer<int S::*>::value,
+                  "int S::* is member pointer");
+    static_assert(lc::is_member_pointer<int S::* const>::value,
+                  "int S::* const is member pointer");
+    static_assert(lc::is_member_pointer<int S::* volatile>::value,
+                  "int S::* volatile is member pointer");
+    static_assert(lc::is_member_pointer<int S::* const volatile>::value,
+                  "int S::* const volatile is member pointer");
+}
+
+// is reference
+TEST(TypeTraits, is_reference) {
+    static_assert(!lc::is_reference<int>::value, "int is reference");
+    static_assert(!lc::is_reference<const int>::value,
+                  "const int is reference");
+    static_assert(!lc::is_reference<volatile int>::value,
+                  "volatile int is reference");
+    static_assert(!lc::is_reference<const volatile int>::value,
+                  "const volatile int is reference");
+
+    static_assert(!lc::is_reference<int[]>::value, "int[] is not reference");
+    static_assert(!lc::is_reference<int[5]>::value, "int[5] is not reference");
+
+    static_assert(!lc::is_reference<int *>::value, "int* is not reference");
+    static_assert(lc::is_reference<int &>::value, "int& is reference");
+    static_assert(lc::is_reference<int &&>::value, "int&& is reference");
 }
 
 // ---------------------------------------------

@@ -14,7 +14,7 @@ namespace lc {
 #  if __has_builtin(__is_unbounded_array)
 
 template <class _Tp>
-struct is_unbounded_array : bool_constant<__is_unbounded_array(_Tp)> {};
+struct is_unbounded_array : _bool_constant<__is_unbounded_array(_Tp)> {};
 
 template <class _Tp>
 inline constexpr bool is_unbounded_array_v = __is_unbounded_array(_Tp);

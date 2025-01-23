@@ -4,6 +4,8 @@
 #define ___TYPE_TRAITS_IS_MEMBER_FUNCTION_POINTER_H
 
 #include "___type_traits/integral_constant.h"
+#include "___type_traits/is_member_pointer.h"
+#include "___type_traits/remove_const.h"
 #include "configs.h"
 
 namespace lc {
@@ -12,7 +14,7 @@ namespace lc {
 
 template <class _Tp>
 struct is_member_function_pointer
-    : public bool_constant<__is_member_function_pointer(_Tp)> {};
+    : public _bool_constant<__is_member_function_pointer(_Tp)> {};
 
 #  if __STL_CPP_VERSION >= 17
 template <class _Tp>
@@ -21,10 +23,6 @@ inline constexpr bool is_member_function_pointer_v =
 #  endif
 
 #else  // __has_builtin(__is_member_function_pointer)
-
-#  include "___type_traits/is_member_pointer.h"
-#  include "___type_traits/remove_const.h"
-
 template <class _Tp>
 struct is_member_function_pointer
     : public bool_constant<

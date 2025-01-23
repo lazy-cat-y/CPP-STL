@@ -12,7 +12,7 @@ namespace lc {
 
 template <class _Tp>
 struct has_unique_object_representations
-    : bool_constant<__has_unique_object_representations(_Tp)> {};
+    : _bool_constant<__has_unique_object_representations(_Tp)> {};
 
 template <class _Tp>
 inline constexpr bool has_unique_object_representations_v =

@@ -10,7 +10,7 @@ namespace lc {
 #if __has_builtin(__is_volatile)
 
 template <class _Tp>
-struct is_volatile : bool_constant<__is_volatile(_Tp)> {};
+struct is_volatile : _bool_constant<__is_volatile(_Tp)> {};
 
 #  if __STL_CPP_VERSION >= 17
 template <class _Tp>

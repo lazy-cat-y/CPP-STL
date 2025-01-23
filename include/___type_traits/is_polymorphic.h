@@ -9,7 +9,7 @@
 namespace lc {
 
 template <class _Tp>
-struct is_polymorphic : bool_constant<__is_polymorphic(_Tp)> {};
+struct is_polymorphic : _bool_constant<__is_polymorphic(_Tp)> {};
 
 #if __STL_CPP_VERSION >= 17
 template <class _Tp>

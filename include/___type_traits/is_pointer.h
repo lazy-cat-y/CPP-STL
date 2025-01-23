@@ -12,7 +12,7 @@ namespace lc {
 #if __has_builtin(__is_pointer)
 
 template <class _Tp>
-struct is_pointer : bool_constant<__is_pointer(_Tp)> {};
+struct is_pointer : _bool_constant<__is_pointer(_Tp)> {};
 
 #if __STL_CPP_VERSION >= 17
 template <class _Tp>

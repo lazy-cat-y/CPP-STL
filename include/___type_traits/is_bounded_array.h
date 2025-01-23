@@ -3,11 +3,10 @@
 #ifndef ___TYPE_TRAITS_IS_BOUNDED_ARRAY_H
 #define ___TYPE_TRAITS_IS_BOUNDED_ARRAY_H
 
+#include "___type_traits/integral_constant.h"
 #include "configs.h"
 
 #if __STL_CPP_VERSION >= 20
-
-#  include "___type_traits/integral_constant.h"
 
 namespace lc {
 

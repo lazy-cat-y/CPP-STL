@@ -4,6 +4,8 @@
 #define ___TYPE_TRAITS_IS_MEMBER_OBJECT_POINTER_H
 
 #include "___type_traits/integral_constant.h"
+#include "___type_traits/is_member_pointer.h"
+#include "___type_traits/remove_cv.h"
 #include "configs.h"
 
 namespace lc {
@@ -12,28 +14,24 @@ namespace lc {
 
 template <class _Tp>
 struct is_member_object_pointer
-    : bool_constant<__is_member_object_pointer(_Tp)> {};
+    : _bool_constant<__is_member_object_pointer(_Tp)> {};
 
-#if __STL_CPP_VERSION >= 17
+#  if __STL_CPP_VERSION >= 17
 template <class _Tp>
 inline constexpr bool is_member_object_pointer_v =
     __is_member_object_pointer(_Tp);
-#endif
+#  endif
 
 #else  // __has_builtin(__is_member_object_pointer)
-
-#  include "___type_traits/is_member_pointer.h"
-#  include "___type_traits/remove_cv.h"
-
 template <class _Tp>
 struct is_member_object_pointer
     : bool_constant<__is_member_pointer_t<__remove_cv_t<_Tp>>::__is_obj> {};
 
-#if __STL_CPP_VERSION >= 17
+#  if __STL_CPP_VERSION >= 17
 template <class _Tp>
 inline constexpr bool is_member_object_pointer_v =
     is_member_object_pointer<_Tp>::value;
-#endif
+#  endif
 
 #endif  // __has_builtin(__is_member_object_pointer)
 

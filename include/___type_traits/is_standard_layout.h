@@ -9,7 +9,7 @@
 namespace lc {
 
 template <class _Tp>
-struct is_standard_layout : bool_constant<__is_standard_layout(_Tp)> {};
+struct is_standard_layout : _bool_constant<__is_standard_layout(_Tp)> {};
 
 #if __STL_CPP_VERSION >= 17
 template <class _Tp>

@@ -3,6 +3,8 @@
 #ifndef __TYPE_TRAITS_REMOVE_CV_H
 #define __TYPE_TRAITS_REMOVE_CV_H
 
+#include "___type_traits/remove_const.h"
+#include "___type_traits/remove_volatile.h"
 #include "configs.h"
 
 namespace lc {
@@ -17,10 +19,7 @@ struct remove_cv {
 template <class _Tp>
 using __remove_cv_t = __remove_cv(_Tp);
 
-#else  // __has_builtin(__remove_cv) && !defined(_LIBCPP_COMPILER_GCC)
-
-#  include "___type_traits/remove_const.h"
-#  include "___type_traits/remove_volatile.h"
+#else   // __has_builtin(__remove_cv) && !defined(_LIBCPP_COMPILER_GCC)
 
 template <class _Tp>
 struct remove_cv {

@@ -3,6 +3,8 @@
 #define ___TYPE_TRAITS_IS_FUNCTION_H
 
 #include "___type_traits/integral_constant.h"
+#include "___type_traits/is_const.h"
+#include "___type_traits/is_reference.h"
 #include "configs.h"
 
 namespace lc {
@@ -11,21 +13,18 @@ namespace lc {
 
 template <class _Tp>
 struct is_function : public integral_constant<bool, __is_function(_Tp)> {};
-#else
 
-// TODO: Implement is_function
-// template <class _Tp>
-// struct is_function
-//     : public integral_constant<bool, !(std::is_reference<_Tp>::value ||
-//                                        std::is_const<_Tp>::value)> {};
+#else   // __has_builtin(__is_function)
 
-#  error "is_function is not supported"
+template <class _Tp>
+struct is_function : public _bool_constant<!(is_reference<_Tp>::value ||
+                                             is_const<const _Tp>::value)> {};
 
 #endif  // __has_builtin(__is_function)
 
-#if __STL_CPP_VERSION >= 17
+#if _LIBCPP_STD_VER >= 17
 template <class _Tp>
-inline constexpr bool is_function_v = __is_function(_Tp);
+inline constexpr bool is_function_v = is_function<_Tp>::value;
 #endif
 
 }  // namespace lc

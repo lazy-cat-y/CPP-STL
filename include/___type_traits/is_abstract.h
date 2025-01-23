@@ -9,7 +9,7 @@
 namespace lc {
 
 template <class _Tp>
-struct is_abstract : bool_constant<__is_abstract(_Tp)> {};
+struct is_abstract : _bool_constant<__is_abstract(_Tp)> {};
 
 #if __STL_CPP_VERSION >= 17
 template <class _Tp>

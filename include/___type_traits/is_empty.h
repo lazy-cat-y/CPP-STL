@@ -9,7 +9,7 @@
 namespace lc {
 
 template <class _Tp>
-struct is_empty : bool_constant<__is_empty(_Tp)> {};
+struct is_empty : _bool_constant<__is_empty(_Tp)> {};
 
 #if __STL_CPP_VERSION >= 17
 template <class _Tp>

@@ -9,7 +9,7 @@
 namespace lc {
 
 template <class _Tp>
-struct is_trivial : bool_constant<__is_trivial(_Tp)> {};
+struct is_trivial : _bool_constant<__is_trivial(_Tp)> {};
 
 #if __STL_CPP_VERSION >= 17
 template <class _Tp>

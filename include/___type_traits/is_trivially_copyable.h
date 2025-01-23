@@ -9,7 +9,7 @@
 namespace lc {
 
 template <class _Tp>
-struct is_trivially_copyable : bool_constant<__is_trivially_copyable(_Tp)> {};
+struct is_trivially_copyable : _bool_constant<__is_trivially_copyable(_Tp)> {};
 
 #if __STL_CPP_VERSION >= 17
 template <class _Tp>

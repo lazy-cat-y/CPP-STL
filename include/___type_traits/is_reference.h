@@ -12,13 +12,13 @@ namespace lc {
     __has_builtin(__is_rvalue_reference) && __has_builtin(__is_reference)
 
 template <class _Tp>
-struct is_lvalue_reference : bool_constant<__is_lvalue_reference(_Tp)> {};
+struct is_lvalue_reference : _bool_constant<__is_lvalue_reference(_Tp)> {};
 
 template <class _Tp>
-struct is_rvalue_reference : bool_constant<__is_rvalue_reference(_Tp)> {};
+struct is_rvalue_reference : _bool_constant<__is_rvalue_reference(_Tp)> {};
 
 template <class _Tp>
-struct is_reference : bool_constant<__is_reference(_Tp)> {};
+struct is_reference : _bool_constant<__is_reference(_Tp)> {};
 
 #  if __STL_CPP_VERSION >= 17
 template <class _Tp>

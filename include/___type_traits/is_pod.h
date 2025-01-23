@@ -9,7 +9,7 @@
 namespace lc {
 
 template <class _Tp>
-struct is_pod : bool_constant<__is_pod(_Tp)> {};
+struct is_pod : _bool_constant<__is_pod(_Tp)> {};
 
 #if __STL_CPP_VERSION >= 17
 template <class _Tp>

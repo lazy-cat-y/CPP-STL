@@ -11,7 +11,7 @@ namespace lc {
 #if __has_builtin(__is_const)
 
 template <class _Tp>
-struct is_const : bool_constant<__is_const(_Tp)> {};
+struct is_const : _bool_constant<__is_const(_Tp)> {};
 
 #  if __STL_CPP_VERSION >= 17
 template <class _Tp>

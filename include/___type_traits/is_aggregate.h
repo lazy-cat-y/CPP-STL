@@ -11,7 +11,7 @@
 namespace lc {
 
 template <class _Tp>
-struct is_aggregate : bool_constant<__is_aggregate(_Tp)> {};
+struct is_aggregate : _bool_constant<__is_aggregate(_Tp)> {};
 
 template <class _Tp>
 inline constexpr bool is_aggregate_v = __is_aggregate(_Tp);
