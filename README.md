@@ -2,6 +2,8 @@
 
 # Personal CPP STL
 
+**This project is still under development.**
+
 This repository contains the implementation of some of the most commonly used data structures and algorithms in C++. The implementation is based on the [cpp reference](https://en.cppreference.com/w/) and [llvm libc++](https://github.com/llvm/llvm-project). The test library is [googletest](https://github.com/google/googletest).
 
 ---
