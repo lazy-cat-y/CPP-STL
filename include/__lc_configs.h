@@ -3,45 +3,58 @@
 #ifndef __CONFIGS_CONFIG_H
 #define __CONFIGS_CONFIG_H
 
-#if defined(_PTHREADS) || defined(_POSIX_THREADS) || defined(_REENTRANT)
-#  define __STL_MULTITHREADED
-#elif defined(_WIN32) || defined(__WIN32__)
-#  define __STL_MULTITHREADED
+#if defined(__cplusplus)
+
+#  if !defined(__LC_CPP_STD_VER)
+
+#    if __cplusplus <= 201103L
+#      define __LC_CPP_STD_VER 11
+#    elif __cplusplus <= 201402L
+#      define __LC_CPP_STD_VER 14
+#    elif __cplusplus <= 201703L
+#      define __LC_CPP_STD_VER 17
+#    elif __cplusplus <= 202002L
+#      define __LC_CPP_STD_VER 20
+#    elif __cplusplus <= 202302L
+#      define __LC_CPP_STD_VER 23
+#    else
+#      define __LC_CPP_STD_VER 26
+#    endif
+#  endif  // __LC_CPP_STD_VER
+
+#  if __LC_CPP_STD_VER >= 11
+#    define __LC_ALIGNOF(_Tp)    alignof(_Tp)
+#    define __LC_ALIGNAS_TYPE(x) alignas(x)
+#    define __LC_ALIGNAS(x)      alignas(x)
+#    define __LC_NORETURN        [[noreturn]]
+#    define __LC_NOEXCEPT        noexcept
+#    define __LC_NOEXCEPT_(x)    noexcept(x)
+#    define __LC_CONSTEXPR       constexpr
+#    define __LC_NODISCARD
+#    define __LC_FALLTHROUGH
+#    define __LC_MAYBE_UNUSED
+#    define __LC_EXPLICIT
+#    if __LC_CPP_STD_VER >= 17
+#      undef __LC_NODISCARD
+#      undef __LC_FALLTHROUGH
+#      undef __LC_MAYBE_UNUSED
+#      undef __LC_EXPLICIT
+#      define __LC_FALLTHROUGH  [[fallthrough]]
+#      define __LC_MAYBE_UNUSED [[maybe_unused]]
+#      define __LC_NODISCARD    [[nodiscard]]
+#      define __LC_EXPLICIT     explicit
+#    endif  // __LC_CPP_STD_VER >= 17
+#  endif    // __LC_CPP_STD_VER >= 11
+
+#endif      // __cplusplus
+
+#if !defined(__LC_NODEBUG)
+#  define __LC_NODEBUG __attribute__((__nodebug__))
 #endif
 
-#if !defined(__STL_CPP_VERSION)
-#  if __cplusplus < 199711L
-#    error "STLport requires C++98-compliant compiler"
-#  elif __cplusplus <= 201103L
-#    define __STL_CPP_VERSION 11
-#  elif __cplusplus <= 201402L
-#    define __STL_CPP_VERSION 14
-#  elif __cplusplus <= 201703L
-#    define __STL_CPP_VERSION 17
-#  elif __cplusplus <= 202002L
-#    define __STL_CPP_VERSION 20
-#  elif __cplusplus <= 202302L
-#    define __STL_CPP_VERSION 23
-#  else
-#    define __STL_CPP_VERSION 26
-#  endif
-#endif
-
-#if !defined(__STL_THROW_BAD_ALLOC)
-#  include <new>
-#  define __STL_THROW_BAD_ALLOC throw std::bad_alloc
-#endif
-
-#if !defined(__STL_NOEXCEPT)
-#  if __cplusplus >= 201103L
-#    define __STL_NOEXCEPT noexcept
-#  else
-#    define __STL_NOEXCEPT throw()
-#  endif
-#endif
-
-#if !defined(__STL_NODEBUG)
-#  define __STL_NODEBUG __attribute__((__nodebug__))
+#if !defined(__LC_NAMESPACE_BEGIN)
+#  define __LC_NAMESPACE_BEGIN namespace lc {
+#  define __LC_NAMESPACE_END   }
 #endif
 
 #endif /* __CONFIGS_CONFIG_H */

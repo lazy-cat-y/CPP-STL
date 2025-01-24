@@ -30,7 +30,7 @@ include(FetchContent)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-option(ENABLE_BASE_TEST "Enable base test" OFF)
+option(ENABLE_BASE_TEST "Enable base test" ON)
 
 if (ENABLE_BASE_TEST)
     enable_testing()
