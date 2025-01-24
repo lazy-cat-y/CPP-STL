@@ -41,11 +41,17 @@ public:
         return *this;
     }
 
-    front_insert_iterator &operator*() {}
+    front_insert_iterator &operator*() {
+        return *this;
+    }
 
-    front_insert_iterator &operator++() {}
+    front_insert_iterator &operator++() {
+        return *this;
+    }
 
-    front_insert_iterator operator++(int) {}
+    front_insert_iterator operator++(int) {
+        return *this;
+    }
 
 protected:
     container_type *__container;

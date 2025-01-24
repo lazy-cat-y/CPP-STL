@@ -39,11 +39,17 @@ public:
         return *this;
     }
 
-    back_insert_iterator &operator*() {}
+    back_insert_iterator &operator*() {
+        return *this;
+    }
 
-    back_insert_iterator &operator++() {}
+    back_insert_iterator &operator++() {
+        return *this;
+    }
 
-    back_insert_iterator operator++(int) {}
+    back_insert_iterator operator++(int) {
+        return *this;
+    }
 
 protected:
     container_type *container;
