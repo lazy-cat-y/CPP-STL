@@ -22,6 +22,7 @@ public:
     typedef void                difference_type;
     typedef void                pointer;
     typedef void                reference;
+    typedef _Container          container_type;
 
 public:
 
@@ -31,11 +32,13 @@ public:
     front_insert_iterator &operator=(
         const typename _Container::value_type &__value) {
         __container->push_front(__value);
+        return *this;
     }
 
     front_insert_iterator &operator=(
         typename _Container::value_type &&__value) {
         __container->push_front(std::move(__value));
+        return *this;
     }
 
     front_insert_iterator &operator*() {}
@@ -45,7 +48,7 @@ public:
     front_insert_iterator operator++(int) {}
 
 protected:
-    _Container *__container;
+    container_type *__container;
 };
 
 __LC_NAMESPACE_END
