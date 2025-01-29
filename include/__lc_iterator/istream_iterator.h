@@ -70,6 +70,16 @@ public:
         return __tmp;
     }
 
+    template <class _Up, class _CharUp, class _TraitU, class _DistanceU>
+    friend bool operator==(
+        const istream_iterator<_Up, _CharUp, _TraitU, _DistanceU> &__lhs,
+        const istream_iterator<_Up, _CharUp, _TraitU, _DistanceU> &__rhs);
+
+    template <class _Up, class _CharUp, class _TraitU, class _DistanceU>
+    friend bool operator!=(
+        const istream_iterator<_Up, _CharUp, _TraitU, _DistanceU> &__lhs,
+        const istream_iterator<_Up, _CharUp, _TraitU, _DistanceU> &__rhs);
+
 private:
     istream_type *__in_stream_;
     _Tp           __value_;

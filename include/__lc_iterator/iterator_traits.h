@@ -45,11 +45,11 @@ struct __has_iterator_category {
     static std::true_type __test(
         std::void_t<typename _Up::iterator_category> *);
 
-    static __LC_CONSTEXPR bool value = decltype(__test<_Tp>(nullptr))::value;
+    static const bool value = decltype(__test<_Tp>(nullptr))::value;
 };
 
 template <class _Iter, bool>
-struct __iterator_traits;
+struct __iterator_traits {};
 
 template <class _Iter, bool>
 struct __iterator_traits_impl {};
@@ -80,6 +80,15 @@ struct iterator_traits
 // For pointers
 template <class _Tp>
 struct iterator_traits<_Tp *> {
+    typedef std::ptrdiff_t             difference_type;
+    typedef std::remove_cv_t<_Tp>      value_type;
+    typedef _Tp                       *pointer;
+    typedef _Tp                       &reference;
+    typedef random_access_iterator_tag iterator_category;
+};
+
+template <class _Tp>
+struct iterator_traits<std::__wrap_iter<_Tp *>> {
     typedef std::ptrdiff_t             difference_type;
     typedef std::remove_cv_t<_Tp>      value_type;
     typedef _Tp                       *pointer;

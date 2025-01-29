@@ -3,6 +3,8 @@
 #ifndef __CONFIGS_CONFIG_H
 #define __CONFIGS_CONFIG_H
 
+#include <iostream>
+
 #if defined(__cplusplus)
 
 #  if !defined(__LC_CPP_STD_VER)
@@ -30,20 +32,17 @@
 #    define __LC_NOEXCEPT        noexcept
 #    define __LC_NOEXCEPT_(x)    noexcept(x)
 #    define __LC_CONSTEXPR       constexpr
-#    define __LC_NODISCARD
-#    define __LC_FALLTHROUGH
-#    define __LC_MAYBE_UNUSED
-#    define __LC_EXPLICIT
-#    if __LC_CPP_STD_VER >= 17
-#      undef __LC_NODISCARD
-#      undef __LC_FALLTHROUGH
-#      undef __LC_MAYBE_UNUSED
-#      undef __LC_EXPLICIT
+#    if __LC_CPP_STD_VER < 17
+#      define __LC_NODISCARD
+#      define __LC_FALLTHROUGH
+#      define __LC_MAYBE_UNUSED
+#      define __LC_EXPLICIT
+#    else  // __LC_CPP_STD_VER >= 17
 #      define __LC_FALLTHROUGH  [[fallthrough]]
 #      define __LC_MAYBE_UNUSED [[maybe_unused]]
 #      define __LC_NODISCARD    [[nodiscard]]
 #      define __LC_EXPLICIT     explicit
-#    endif  // __LC_CPP_STD_VER >= 17
+#    endif  // __LC_CPP_STD_VER < 17
 #  endif    // __LC_CPP_STD_VER >= 11
 
 #endif      // __cplusplus
@@ -57,4 +56,23 @@
 #  define __LC_NAMESPACE_END   }
 #endif
 
-#endif /* __CONFIGS_CONFIG_H */
+#if defined(DEBUG)
+
+#  define __LC_ASSERT(condition, message)                   \
+      do {                                                  \
+          if (!(condition)) {                               \
+              fprintf(stderr,                                \
+                     "Assertion failed: %s. Message: %s\n", \
+                     #condition,                            \
+                     message);                              \
+              std::abort();                                 \
+          }                                                 \
+      } while (0)
+
+#else   // DEBUG
+
+#  define __LC_ASSERT(condition, message) ((void)0)
+
+#endif  // DEBUG
+
+#endif  /* __CONFIGS_CONFIG_H */
