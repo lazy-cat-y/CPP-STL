@@ -58,18 +58,18 @@
 
 #if defined(DEBUG)
 
-#  define __LC_ASSERT(condition, message)                   \
-      do {                                                  \
-          if (!(condition)) {                               \
+#  define __LC_ASSERT(condition, message)                    \
+      do {                                                   \
+          if (!(condition)) {                                \
               fprintf(stderr,                                \
-                     "Assertion failed: %s. Message: %s\n", \
-                     #condition,                            \
-                     message);                              \
-              std::abort();                                 \
-          }                                                 \
+                      "Assertion failed: %s. Message: %s\n", \
+                      #condition,                            \
+                      message);                              \
+              std::abort();                                  \
+          }                                                  \
       } while (0)
 
-#else   // DEBUG
+#else  // DEBUG
 
 #  define __LC_ASSERT(condition, message) ((void)0)
 

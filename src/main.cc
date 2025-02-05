@@ -4,6 +4,7 @@
 #include <iterator>
 #include <memory>
 #include <sstream>
+#include <vector>
 
 #include "temp.h"
 
@@ -15,6 +16,7 @@ int main() {
     std::istream_iterator<int>     istream_iter;
     std::istringstream             in {"Hello, world"};
     std::istreambuf_iterator<char> it {in}, end;
-    std::array<int, 5>              arr {1, 2, 3, 4, 5};
+    std::vector<int>               vec {1, 2, 3, 4, 5};
+    std::array<int, 5>             arr {1, 2, 3, 4, 5};
     return 0;
 }

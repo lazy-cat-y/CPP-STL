@@ -349,6 +349,17 @@ inline __LC_CONSTEXPR void swap(array<_Tp, _Size> &__lhs,
 }
 #endif
 
+#if __LC_CPP_STD_VER >= 17
+// The program is ill-formed if (std::is_same_v<T, U> && ...) is not true. Note
+// that (std::is_same_v<T, U> && ...) is true when sizeof...(U) is zero.
+template <class _Tp, class... _Up,
+          class = std::enable_if_t<((std::is_same_v<_Tp, _Up> && ...) &&
+                                    sizeof...(_Up) != 0) ||
+                                   sizeof...(_Up) == 0>>
+array(_Tp, _Up...) -> array<_Tp, 1 + sizeof...(_Up)>;
+
+#endif
+
 __LC_NAMESPACE_END
 
 template <class _Tp, std::size_t _Size>
