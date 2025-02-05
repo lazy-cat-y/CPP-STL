@@ -22,6 +22,7 @@ message(STATUS "Google Test binary dir: ${googletest_BINARY_DIR}")
 
 set(SOURCE_FILES
     test_iterator.cc
+    test_array.cc
 )
 
 add_executable(stl-tests ${SOURCE_FILES})
@@ -34,3 +35,5 @@ target_include_directories(stl-tests PRIVATE
 )
 
 add_test(NAME IteratorTest COMMAND stl-tests TestIterator)
+
+add_test(NAME ArrayTest COMMAND stl-tests TestArray)
